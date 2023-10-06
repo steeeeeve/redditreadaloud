@@ -31,11 +31,10 @@ def get_duration_pydub(file_path):
 def main():
     reddit = praw.Reddit(
         client_id=st.secrets['reddit_client_id'],
-        secret = st.secrets['reddit_secret'],        
+        client_secret = st.secrets['reddit_secret'],        
         user_agent="readaloud",
         redirect_uri='https://stevenjin.com/oauth/redirect'
     )
-
 
     reddit.read_only = True
 
