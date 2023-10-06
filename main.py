@@ -29,7 +29,13 @@ def get_duration_pydub(file_path):
 
 
 def main():
-    reddit = praw.Reddit()
+    reddit = praw.Reddit(
+        client_id=st.secrets['reddit_client_id'],
+        secret = st.secrets['reddit_secret'],        
+        user_agent="readaloud",
+        redirect_uri='https://stevenjin.com/oauth/redirect'
+    )
+
 
     reddit.read_only = True
 
@@ -61,9 +67,9 @@ def main():
                 #mp3_speech = BytesIO()
                 speech = gTTS(comments[comment].body, slow=False)
                 #tts.write_to_fp(mp3_speech)
-                speech.save('test.mp3')
-                autoplay_audio('test.mp3')
-                time.sleep(get_duration_pydub('test.mp3'))
+                speech.save(post.id+'.mp3')
+                autoplay_audio(post.id+'.mp3')
+                time.sleep(get_duration_pydub(post.id+'.mp3'))
         #for comment in comments:
          #   print(comment.body)
 
